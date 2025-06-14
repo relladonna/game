@@ -2,6 +2,7 @@ import pygame
 import json
 from pathlib import Path
 from config import Config
+from items import Item
 
 class DialogSystem:
     def __init__(self, font):

@@ -1,4 +1,10 @@
 {
+    "found_key_dialog": {
+        "lines": [
+            {"speaker": "Софья", "text": "Хм, этот ключ выглядит старым..."},
+            {"speaker": "", "text": "На нем есть странные отметины."}
+        ]
+    },
     "initial_dialog": {
         "lines": [
             {

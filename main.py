@@ -2,6 +2,7 @@ import pygame
 import sys
 from config import Config
 from world import World
+from items import Item
 
 def main():
     pygame.init()

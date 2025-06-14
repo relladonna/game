@@ -4,6 +4,9 @@ from entities.player import Player
 from entities.doctor import Doctor
 from entities.aglaia import Aglaia
 from dialog_system import DialogSystem
+from items import Item
+from inventory import Inventory
+
 
 class World:
     def __init__(self):
@@ -34,6 +37,25 @@ class World:
         # Начинаем с правого края мира
         self.world_offset_x = 4056 - Config.SCREEN_WIDTH
         self.player = Player()  # Игрок создается после установки offset
+
+        self.items = self._init_items()
+        self.inventory = Inventory()
+
+    def _init_items(self) -> list[Item]:
+        return [
+            Item(
+                x=1000, y=500,
+                item_data={
+                    'id': 'main_key',
+                    'name': 'Ключ от чердака',
+                    'description': 'Старый ржавый ключ с гравировкой',
+                    'world_sprite': Config.KEY_SPRITE,
+                    'inventory_sprite': Config.KEY_ICON,
+                    'pickup_dialog': 'found_key_dialog'
+                }
+            ),
+            # Другие предметы...
+        ]
 
     def handle_interactions(self):
         if self.dialog_system.is_active:
@@ -77,6 +99,14 @@ class World:
         self.handle_interactions()
         self.dialog_system.update(16)
 
+        # Обновление предметов
+        for item in self.items[:]:
+            dialog_id = item.update(self.player.rect, (self.world_offset_x, 0))
+            if dialog_id:
+                if self.inventory.add_item(item):
+                    self.dialog_system.start_dialog(dialog_id)
+                    self.items.remove(item)
+
     def render(self, screen):
         # Отрисовка фона
         screen.blit(self.background, (-self.world_offset_x, 0))
@@ -84,6 +114,11 @@ class World:
         # Отрисовка NPC
         for npc in self.npcs:
             npc.render(screen, self.world_offset_x)
+
+        for item in self.items:
+            item.render(screen, (self.world_offset_x, 0))
+
+        self.inventory.render(screen, self.font)
         
         # Отрисовка игрока
         self.player.render(screen)
