@@ -15,8 +15,8 @@ class World:
         
         # Создание NPC
         self.npcs = [
-            Doctor(1200, 350),
-            Aglaia(1500, 370)
+            Doctor(1400, 350),
+            Aglaia(1600, 370)
         ]
         
         # Загрузка фона
@@ -30,6 +30,10 @@ class World:
         self.dialog_system = DialogSystem(self.font)
         self.world_offset_x = 0
         self.initial_dialog_shown = False
+
+        # Начинаем с правого края мира
+        self.world_offset_x = 4056 - Config.SCREEN_WIDTH
+        self.player = Player()  # Игрок создается после установки offset
 
     def handle_interactions(self):
         if self.dialog_system.is_active:
@@ -51,10 +55,15 @@ class World:
     def update(self):
         keys = pygame.key.get_pressed()
         movement = self.player.update(keys)
-        
-        # Движение мира
+
+        # Смещаем мир в противоположную сторону
         self.world_offset_x -= movement
-        self.world_offset_x = max(0, min(self.world_offset_x, 4056 - Config.SCREEN_WIDTH))
+
+        # Границы мира
+        self.world_offset_x = max(0, min(
+            self.world_offset_x,
+            4056 - Config.SCREEN_WIDTH
+        ))
         
         # Автоматический диалог
         if not self.initial_dialog_shown and 1100 < self.world_offset_x < 1200:

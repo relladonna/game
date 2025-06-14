@@ -27,9 +27,9 @@ class NPC:
         
         # Анимация подсказки
         if self.can_interact:
-            self.hint_alpha = min(255, self.hint_alpha + 15)
+            self.hint_alpha = min(255, self.hint_alpha + 5)
         else:
-            self.hint_alpha = max(0, self.hint_alpha - 15)
+            self.hint_alpha = max(0, self.hint_alpha - 5)
 
     def render(self, screen, world_offset_x):
         # Отрисовка NPC
