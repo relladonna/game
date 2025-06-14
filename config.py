@@ -21,3 +21,5 @@ class Config:
     DOCTOR_SPRITE = os.path.join(SPRITES_DIR, "doctor.png")
     BACKGROUND = os.path.join(SPRITES_DIR, "background.png")
     HINT_SPRITE = os.path.join(SPRITES_DIR, "hint.png")
+    DIALOGS_PATH = os.path.join("data", "dialogs.json")
+    FONT_PATH = os.path.join(ASSETS_DIR, "font.ttf")

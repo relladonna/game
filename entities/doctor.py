@@ -1,6 +1,5 @@
-import pygame
-from config import Config
 from entities.npc import NPC
+from config import Config
 
 class Doctor(NPC):
     def __init__(self, x, y):
