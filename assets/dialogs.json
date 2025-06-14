@@ -1,0 +1,24 @@
+{
+    "ghost_first_meeting": {
+        "type": "auto",
+        "condition": {
+            "required_item": null,
+            "game_progress": 0,
+            "time_of_day": "night"
+        },
+        "lines": [
+            {"speaker": "Елизавета", "text": "Ты наконец-то меня видишь..."}
+        ]
+    },
+    "ghost_with_ring": {
+        "type": "auto",
+        "condition": {
+            "required_item": "wedding_ring",
+            "game_progress": 1,
+            "time_of_day": "any"
+        },
+        "lines": [
+            {"speaker": "Елизавета", "text": "Ты нашла моё кольцо... Это важно."}
+        ]
+    }
+}
